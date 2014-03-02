@@ -55,10 +55,9 @@ listControlGroups = unfoldTreeM groups
 -- Get Just Tasks for a cgroup, Nothing if invalid group
 getControlGroup :: ControlGroupName -> IO (Maybe ControlGroup)
 getControlGroup grp = do
-    let path = cgrpPath grp
     isGrp <- isCgroup grp
     if isGrp then do
-        tasks <- map (Task . TaskId) . lines <$> readFile (path </> "tasks")
+        tasks <- map (Task . TaskId) . lines <$> readFile (tasksPath grp)
         return $ Just $ ControlGroup grp tasks
     else
         return Nothing
