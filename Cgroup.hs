@@ -52,7 +52,7 @@ listControlGroups = unfoldTreeM groups
                 hidden = ("." `isPrefixOf`)
                 path = cgrpPath grp
 
--- Get Jsut Tasks for a cgroup, Nothing if invalid group
+-- Get Just Tasks for a cgroup, Nothing if invalid group
 getControlGroup :: ControlGroupName -> IO (Maybe ControlGroup)
 getControlGroup grp = do
     let path = cgrpPath grp
