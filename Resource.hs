@@ -12,9 +12,9 @@ newtype ControlGroupName = ControlGroupName String
 instance Monoid ControlGroupName where
     mempty = ControlGroupName mempty
     ControlGroupName a `mappend` ControlGroupName b = ControlGroupName $ dedup '/' $ a <> "/" <> b
-        where dedup c (c:c:r) = c : dedup c r
-              dedup c (h : t) = h : dedup c t
-              dedup _ []      = []
+        where dedup c (x:y:r) | x == y = c : dedup c r
+              dedup c (h : t)          = h : dedup c t
+              dedup _ []               = []
 
 instance FromJSON ControlGroupName
 instance ToJSON ControlGroupName
